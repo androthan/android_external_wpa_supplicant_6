@@ -1,3 +1,28 @@
+WPA Supplicant 6.x for devices with prebuilt WiFi binaries
+
+This is the latest source code for the WPA supplicant 6.x for CyanogenMod 10.1 (Android 4.2.x), optimized
+for CyanogenMod 11 (Android 4.4.x).
+This will only build the shared libraries "libwpa_cli.so" and "libwpa_client.so".
+The 'wpa_supplicant" won't be built (it's prebuilt).
+This isn't officially supported by the AOSP or The CyanogenMod Project.
+
+How add to Android source tree:
+
+1. Open <android-source>/.repo/manifest.xml
+2. Add the following line:
+   <project name="androthan/android_external_wpa_supplicant_6" path="external/external_wpa_supplicant_6" remote="github" revision="cm-11.0" />
+3. Run command: repo sync
+
+Enable it in BoardConfig.mk in you device tree (device/*/*)
+1. Open your BoardConfig.mk file
+2. Add the following line: WPA_SUPPLICANT_VERSION := VER_0_6_X
+
+Support
+androthan<at>gmail.com
+XDA: androthan
+
+-----------------------------------------------------
+
 wpa_supplicant and hostapd v0.6.x
 ---------------------------------
 
