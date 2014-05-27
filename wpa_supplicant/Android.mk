@@ -1126,20 +1126,29 @@ LOCAL_SRC_FILES := $(OBJS_c)
 LOCAL_C_INCLUDES := $(INCLUDES)
 include $(BUILD_EXECUTABLE)
 
-########################
-include $(CLEAR_VARS)
-LOCAL_MODULE := wpa_supplicant
-ifdef CONFIG_DRIVER_CUSTOM
-LOCAL_STATIC_LIBRARIES := libCustomWifi
-endif
-ifneq ($(BOARD_WPA_SUPPLICANT_PRIVATE_LIB),)
-LOCAL_STATIC_LIBRARIES += $(BOARD_WPA_SUPPLICANT_PRIVATE_LIB)
-endif
-LOCAL_SHARED_LIBRARIES := libc libcutils libcrypto libssl
-LOCAL_CFLAGS := $(L_CFLAGS)
-LOCAL_SRC_FILES := $(OBJS)
-LOCAL_C_INCLUDES := $(INCLUDES)
-include $(BUILD_EXECUTABLE)
+# I disabled those build steps too avoid error with the
+# prebuilt wpa_supplicant in the vendor directory.
+#
+# The static libraries (libCustomWiFi, private-libs) are
+# already included in the prebuilt wpa_supplicant binary.
+#
+# Jonathan Grundmann, androthan<at>gmail.com, 2014
+
+###DISABLED_MODULES#START###
+
+#include $(CLEAR_VARS)
+#LOCAL_MODULE := wpa_supplicant
+#ifdef CONFIG_DRIVER_CUSTOM
+#LOCAL_STATIC_LIBRARIES := libCustomWifi
+#endif
+#ifneq ($(BOARD_WPA_SUPPLICANT_PRIVATE_LIB),)
+#LOCAL_STATIC_LIBRARIES += $(BOARD_WPA_SUPPLICANT_PRIVATE_LIB)
+#endif
+#LOCAL_SHARED_LIBRARIES := libc libcutils libcrypto libssl
+#LOCAL_CFLAGS := $(L_CFLAGS)
+#LOCAL_SRC_FILES := $(OBJS)
+#LOCAL_C_INCLUDES := $(INCLUDES)
+#include $(BUILD_EXECUTABLE)
 
 ########################
 #
@@ -1165,7 +1174,8 @@ include $(BUILD_EXECUTABLE)
 #LOCAL_SRC_FILES := $(LOCAL_MODULE)
 #include $(BUILD_PREBUILT)
 #
-########################
+
+###DISABLED_MODULES#END###
 
 endif # ifeq ($(WPA_BUILD_SUPPLICANT),true)
 
